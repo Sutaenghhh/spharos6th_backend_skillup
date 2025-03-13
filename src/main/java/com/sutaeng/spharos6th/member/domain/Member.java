@@ -1,20 +1,20 @@
 package com.sutaeng.spharos6th.member.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private  String memberUuid;
 
     @Comment("회원이름")
     @Column(nullable = false, length = 100)
@@ -28,7 +28,9 @@ public class Member {
     private String birth;
 
     @Builder
-    public Member(String name, String email, String password, String phoneNumber, String birth) {
+    public Member(Long id, String memberUuid,String name, String email, String password, String phoneNumber, String birth) {
+        this.id = id;
+        this.memberUuid =memberUuid;
         this.name = name;
         this.email = email;
         this.password = password;
